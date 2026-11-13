@@ -1,0 +1,26 @@
+# Evaluation configuration for the Detok streaming experiments.
+parameters:
+  - name: span_lengths
+    type: List[Tuple[int, int]]
+    default: [[2, 4]]
+    description: Allowed subword span lengths for the merge candidate generator.
+  - name: merge_ratio
+    type: float
+    default: 0.35
+    description: Fraction of adjacent subwords merged before decoding.
+  - name: enable_beam
+    type: bool
+    default: true
+    description: Whether to keep the beam of partial detokenizations alive.
+  - name: score_aggregator
+    type: Callable[[float], float]
+    default: null
+    description: Optional callable that rescales partial hypothesis scores.
+  - name: layer_ids
+    type: set
+    default: [3, 6, 9]
+    description: Encoder layers whose subword units are merged.
+  - name: prompt_template
+    type: str, optional
+    default: "<|transcribe|>"
+    description: Prompt prefix used by the streaming decoder.
